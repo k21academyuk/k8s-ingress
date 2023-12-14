@@ -1,29 +1,29 @@
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: networking.k8s.io/v1      # API version for the Ingress resource
+kind: Ingress                         # Specifies the kind of resource, in this case, an Ingress resource
 metadata:
-  name: webapp-ingress
+  name: webapp-ingress                # Name of the Ingress resource
 spec:
-  ingressClassName: nginx
-  rules:
-  - host: my.kubernetes.example
+  ingressClassName: nginx             # Specifies the Ingress class to use (e.g., nginx controller)
+  rules:                              # Rules define how requests should be handled
+  - host: my.kubernetes.example       # Hostname for which this Ingress will apply
     http:
       paths:
-      - path: /webapp1
-        pathType: Prefix
+      - path: /webapp1                # Path for the first backend service
+        pathType: Prefix              # Type of matching for the path (Prefix, Exact, ImplementationSpecific)
         backend:
           service:
-            name: webapp1-svc
+            name: webapp1-svc         # Name of the backend service
             port:
-              number: 80
-      - path: /webapp2
-        pathType: Prefix
+              number: 80              # Port number of the backend service
+      - path: /webapp2                # Path for the second backend service
+        pathType: Prefix              # Type of matching for the path (Prefix, Exact, ImplementationSpecific)
         backend:
           service:
-            name: webapp2-svc
+            name: webapp2-svc         # Name of the backend service
             port:
-              number: 80
-  defaultBackend:
-          service:
-            name: webapp3-svc
-            port:
-              number: 80
+              number: 80              # Port number of the backend service
+  defaultBackend:                     # Default backend service to use if no rules match
+    service:
+      name: webapp3-svc               # Name of the default backend service
+      port:
+        number: 80                    # Port number of the default backend service
